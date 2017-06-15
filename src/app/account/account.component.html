@@ -7,21 +7,22 @@
   <div class="card-block">
     <form #accountForm="ngForm" (ngSubmit)="save(user)">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <label>User Name: </label>
         <input class="form-control" type="text" name="username" [(ngModel)]="user.username" placeholder="Username" required>
       </div>
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <label>Email Address: </label>
         <input class="form-control" type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
-        <select class="form-control" name="category" [(ngModel)]="user.category">
-          <option value="" disabled>Category</option>
-          <option value="society">Society</option>
-          <option value="company">Company</option>
-        </select>
-      </div>
+    <div class="input-group">
+      <label>Organisation: </label> <br/>{{user.organisation}}
+    </div>
+    <div class="input-group">
+      <label>Sector: </label> <br/>{{user.sector}}
+    </div>
+    <div class="input-group">
+      <label>Category: </label> <br/>{{user.category}}
+    </div>
       <button class="btn btn-primary" type="submit" [disabled]="!accountForm.form.valid">
         <i class="fa fa-save"></i> Save
       </button>
