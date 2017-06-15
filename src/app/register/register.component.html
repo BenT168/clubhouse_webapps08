@@ -18,10 +18,10 @@
       </div>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
-        <select class="form-control" name="role" formControlName="role">
-          <option value="" selected disabled>Role</option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+        <select class="form-control" name="category" formControlName="category">
+          <option value="" selected disabled>Category</option>
+          <option value="society">Society</option>
+          <option value="company">Company</option>
         </select>
       </div>
       <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>

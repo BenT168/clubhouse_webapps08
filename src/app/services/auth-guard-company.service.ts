@@ -3,12 +3,12 @@ import {CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '
 import {AuthService} from './auth.service';
 
 @Injectable()
-export class AuthGuardAdmin implements CanActivate {
+export class AuthGuardCompany implements CanActivate {
 
   constructor(public auth: AuthService, private router: Router) {}
 
   canActivate() {
-    return this.auth.isAdmin;
+    return this.auth.isCompany;
   }
 
 }
