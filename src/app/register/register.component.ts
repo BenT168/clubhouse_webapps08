@@ -21,7 +21,11 @@ export class RegisterComponent implements OnInit {
                                Validators.maxLength(100)]);
   password = new FormControl('', [Validators.required,
                                   Validators.minLength(6)]);
-
+  organisation = new FormControl('', [Validators.required,
+                                  Validators.minLength(3)]);
+  location = new FormControl('', [Validators.required,
+                                  Validators.minLength(3)]);
+  sector = new FormControl('', [Validators.required])
   category = new FormControl('', [Validators.required]);
 
   constructor(private formBuilder: FormBuilder,
@@ -34,6 +38,9 @@ export class RegisterComponent implements OnInit {
       username: this.username,
       email: this.email,
       password: this.password,
+      organisation: this.organisation,
+      location: this.location,
+      sector: this.sector,
       category: this.category
     });
   }
@@ -47,6 +54,13 @@ export class RegisterComponent implements OnInit {
   setClassPassword() {
     return { 'has-danger': !this.password.pristine && !this.password.valid };
   }
+  setClassOrganisation() {
+    return { 'has-danger': !this.organisation.pristine && !this.organisation.valid };
+  }
+  setClassLocation() {
+    return { 'has-danger': !this.location.pristine && !this.location.valid };
+  }
+
 
   register() {
     this.userService.register(this.registerForm.value).subscribe(

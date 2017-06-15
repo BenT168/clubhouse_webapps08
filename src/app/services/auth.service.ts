@@ -11,7 +11,7 @@ export class AuthService {
 
   jwtHelper: JwtHelper = new JwtHelper();
 
-  currentUser = { _id: '', username: '', category: '' };
+  currentUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -37,7 +37,7 @@ export class AuthService {
     localStorage.removeItem('token');
     this.loggedIn = false;
     this.isCompany = false;
-    this.currentUser = { _id: '', username: '', category: '' };
+    this.currentUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
     this.router.navigate(['/']);
   }
 
@@ -49,7 +49,10 @@ export class AuthService {
     this.loggedIn = true;
     this.currentUser._id = decodedUser._id;
     this.currentUser.username = decodedUser.username;
+    this.currentUser.organisation = decodedUser.organisation;
+    this.currentUser.location = decodedUser.location;
     this.currentUser.category = decodedUser.category;
+    this.currentUser.sector = decodedUser.sector;
     decodedUser.category === 'company' ? this.isCompany = true : this.isCompany = false;
     delete decodedUser.category;
   }

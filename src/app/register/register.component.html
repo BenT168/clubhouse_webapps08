@@ -16,12 +16,33 @@
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
       </div>
+      <div class="input-group" [ngClass]="setClassOrganisation()">
+        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+        <input class="form-control" type="text" name="organisation" formControlName="organisation" placeholder="Organisation">
+      </div>
+      <div class="input-group" [ngClass]="setClassLocation()">
+        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+        <input class="form-control" type="text" name="location" formControlName="location" placeholder="Location">
+      </div>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
         <select class="form-control" name="category" formControlName="category">
           <option value="" selected disabled>Category</option>
           <option value="society">Society</option>
           <option value="company">Company</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
+        <select class="form-control" name="sector" formControlName="sector">
+          <option value="" selected disabled>Sector</option>
+          <option value="fashion">Fashion</option>
+          <option value="education">Education</option>
+          <option value="sport">Sport</option>
+          <option value="retails">Retails</option>
+          <option value="technology">Technology</option>
+          <option value="finance">Finance</option>
+          <option value="others">Others</option>
         </select>
       </div>
       <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>

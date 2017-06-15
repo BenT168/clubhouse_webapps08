@@ -15,7 +15,7 @@
         <i class="fa fa-user-plus"></i> Register
       </a>
       <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-        <i class="fa fa-user"></i> Account ({{auth.currentUser.username}})
+        <i class="fa fa-user"></i> Account ({{auth.currentUser.organisation}})
       </a>
       <a routerLink="/company" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isCompany">
         <i class="fa fa-lock"></i> Company
