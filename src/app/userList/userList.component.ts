@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
@@ -11,11 +11,13 @@ import { UserService } from '../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
+  selectedUser = {};
   users = [];
   isLoading = true;
 
   constructor(public auth: AuthService,
               public toast: ToastComponent,
+              private router: Router,
               private userService: UserService) { }
 
   ngOnInit() {
@@ -30,11 +32,14 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  deleteUser(user) {
-    this.userService.deleteUser(user).subscribe(
-      data => this.toast.setMessage('user deleted successfully.', 'success'),
-      error => console.log(error),
-      () => this.getUsers()
+  onSelect(user): void {
+    this.selectedUser = user;
+  }
+
+  viewUser(selectedUser) {
+    this.auth.view(selectedUser).subscribe(
+      res => this.router.navigate(['/view'], this.selectedUser),
+      error => this.toast.setMessage('invalid press!', 'danger')
     );
   }
 

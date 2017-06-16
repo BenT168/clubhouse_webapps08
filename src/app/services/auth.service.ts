@@ -12,6 +12,7 @@ export class AuthService {
   jwtHelper: JwtHelper = new JwtHelper();
 
   currentUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
+  viewUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -33,11 +34,21 @@ export class AuthService {
     );
   }
 
+  view(user) {
+    return this.userService.getUser(user).map(res => res.json()).map(
+      res => {
+        this.setViewUser(user);
+        return this.loggedIn;
+      }
+    );
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.loggedIn = false;
     this.isCurrent = false;
     this.currentUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
+    this.viewUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
     this.router.navigate(['/']);
   }
 
@@ -54,6 +65,17 @@ export class AuthService {
     this.currentUser.location = decodedUser.location;
     this.currentUser.category = decodedUser.category;
     this.currentUser.sector = decodedUser.sector;
+  }
+
+  setViewUser(decodedUser) {
+    this.loggedIn = true;
+    this.isCurrent = false;
+    this.viewUser._id = decodedUser._id;
+    this.viewUser.username = decodedUser.username;
+    this.viewUser.organisation = decodedUser.organisation;
+    this.viewUser.location = decodedUser.location;
+    this.viewUser.category = decodedUser.category;
+    this.viewUser.sector = decodedUser.sector;
   }
 
 }

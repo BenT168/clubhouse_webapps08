@@ -5,31 +5,108 @@
 <div class="card" *ngIf="!isLoading">
   <h4 class="card-header">Registered users ({{users.length}})</h4>
   <div class="card-block">
+
+    <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search the user database" ng-model="searchUser">
+      </div>
+    </div>
+  </form>
+
+
+  <ul class="users">
+      <li *ngFor="let user of users" (click)="onSelect(user)"
+      [class.selected]="user === selectedUser">
+    <span class="badge">{{user.organisation}}</span>
+    <span class="badge2">{{user.sector}}</span>
+    <span class="badge3">{{user.category}}</span>
+    <span class="badge4">{{user.email}}</span>
+    <span class="badge5">{{user.location}}</span>
+  </li>
+  </ul>
+  <div *ngIf="selectedUser">
+  <h4>
+    {{selectedUser.organisation | uppercase}} Details! <br/><br/>
+  </h4>
+  <form #accountForm="ngForm" (ngSubmit)="viewUser(selectedUser)">
+    <div class="input-group">
+      <label>User Name: </label> <br/>{{selectedUser.username}}
+    </div>
+    <div class="input-group">
+      <label>Email Address: </label> <br/>{{selectedUser.email}}
+    </div>
+  <div class="input-group">
+    <label>Organisation: </label> <br/>{{selectedUser.organisation}}
+  </div>
+  <div class="input-group">
+    <label>Location/University: </label> <br/>{{selectedUser.location}}
+  </div>
+  <div class="input-group">
+    <label>Sector: </label> <br/>{{selectedUser.sector}}
+  </div>
+  <div class="input-group">
+    <label>Category: </label> <br/>{{selectedUser.category}}<br/><br/>
+  </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!accountForm.form.valid">
+      <i class="fa fa-envelope"></i> Messaging
+    </button>
+  </form>
+  <br/><br/>
+  </div>
+
     <table class="table table-bordered table-striped">
-      <thead class="thead-default">
-        <tr>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Category</th>
-          <th>Sector</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+      <thead>
+      <tr>
+        <td>
+          <a href="/userList" ng-click="sortType = 'username'; sortReverse = !sortReverse">
+            Username
+            <span ng-show="sortType == 'username' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'username' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="/userList" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+          Email
+            <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="/userList" ng-click="sortType = 'category'; sortReverse = !sortReverse">
+          Category
+            <span ng-show="sortType == 'category' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'category' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="/userList" ng-click="sortType = 'sector'; sortReverse = !sortReverse">
+          Sector
+            <span ng-show="sortType == 'sector' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'sector' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          View
+        </td>
+      </tr>
+    </thead>
       <tbody *ngIf="users.length === 0">
         <tr>
           <td colspan="4">There are no registered users.</td>
         </tr>
       </tbody>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users" ng-repeat="search in database | orderBy:sortType:sortReverse | filter:searchUser" >
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
           <td>{{user.category}}</td>
           <td>{{user.sector}}</td>
           <td>
-            <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
-              <i class="fa fa-trash"></i>
-            </button>
+              <button class="view" (click)="viewUser(user)" [disabled]="auth.currentUser._id === user._id">
+                <i class="fa fa-user-circle"></i>
+              </button>
           </td>
         </tr>
       </tbody>

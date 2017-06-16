@@ -5,6 +5,7 @@ import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+import { FilterPipe } from './pipe/filterPipe'
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardCurrent } from './services/auth-guard-current.service';
 import { AppComponent } from './app.component';
@@ -29,7 +30,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AccountComponent,
     UserListComponent,
     ViewComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FilterPipe
   ],
   imports: [
     RoutingModule,
