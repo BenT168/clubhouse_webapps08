@@ -1,31 +1,16 @@
-<div class="container">
-
-  <nav class="navbar navbar-dark bg-primary">
-    <div class="nav navbar-nav">
-      <a routerLink="/" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-home"></i> Home
-      </a>
-      <a routerLink="/cats" class="nav-item nav-link" routerLinkActive="active">
-        <i class="fa fa-list"></i> Cats
-      </a>
-      <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active" *ngIf="!auth.loggedIn">
-        <i class="fa fa-sign-in"></i> Login
-      </a>
-      <a routerLink="/register" class="nav-item nav-link" routerLinkActive="active" *ngIf="!auth.loggedIn">
-        <i class="fa fa-user-plus"></i> Register
-      </a>
-      <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-        <i class="fa fa-user"></i> Account ({{auth.currentUser.organisation}})
-      </a>
-      <a routerLink="/company" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isCompany">
-        <i class="fa fa-lock"></i> Company
-      </a>
-      <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-        <i class="fa fa-sign-out"></i> Logout
-      </a>
-    </div>
-  </nav>
-
-  <router-outlet></router-outlet>
-
+<div id="wrapper" >
+  <nav role="navigation" id="access" >
+    <a class="skip-link icon-reorder" title="Accéder au menu" href="#menu">Menu</a>
+    <ul id="menu" *ngIf="auth.loggedIn">
+      <li class="active"><a class="icon-home" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> Home</a></li><!-- whitespace
+      --><li><a class="icon-envelope-alt" routerLink="/cats" routerLinkActive="active">Messaging</a></li><!-- whitespace
+      --><li><a class="icon-picture" routerLink="/" routerLinkActive="active" *ngIf="!auth.loggedIn">Login</a></li><!-- whitespace
+      --><li><a class="icon-leaf" routerLink="/register" routerLinkActive="active" *ngIf="!auth.loggedIn">Register</a></li><!-- whitespace
+      --><li><a class="icon-leaf" routerLink="/account" routerLinkActive="active" *ngIf="auth.isCurrent">Account ({{auth.currentUser.organisation}})</a></li><!-- whitespace
+      --><li><a class="icon-leaf" routerLink="/view" routerLinkActive="active" *ngIf= "!auth.isCurrent">View User</a></li><!-- whitespace
+      --><li><a class="icon-group" routerLink="/userList" routerLinkActive="active" >User List</a></li><!-- whitespace
+      --><li><a class="icon-picture" routerLink="/logout" routerLinkActive="active">Logout</a></li>
+    </ul>
+      </nav>
+      <router-outlet></router-outlet>
 </div>

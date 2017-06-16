@@ -7,7 +7,7 @@ import { UserService } from '../services/user.service';
 @Injectable()
 export class AuthService {
   loggedIn = false;
-  isCompany = false;
+  isCurrent = false;
 
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -36,7 +36,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.loggedIn = false;
-    this.isCompany = false;
+    this.isCurrent = false;
     this.currentUser = { _id: '', username: '', organisation: '', location: '', category: '', sector: '' };
     this.router.navigate(['/']);
   }
@@ -47,14 +47,13 @@ export class AuthService {
 
   setCurrentUser(decodedUser) {
     this.loggedIn = true;
+    this.isCurrent = true;
     this.currentUser._id = decodedUser._id;
     this.currentUser.username = decodedUser.username;
     this.currentUser.organisation = decodedUser.organisation;
     this.currentUser.location = decodedUser.location;
     this.currentUser.category = decodedUser.category;
     this.currentUser.sector = decodedUser.sector;
-    decodedUser.category === 'company' ? this.isCompany = true : this.isCompany = false;
-    delete decodedUser.category;
   }
 
 }

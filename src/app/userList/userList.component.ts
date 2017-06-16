@@ -5,11 +5,11 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-company',
-  templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss']
+  selector: 'app-userList',
+  templateUrl: './userList.component.html',
+  styleUrls: ['./userList.component.scss']
 })
-export class CompanyComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   users = [];
   isLoading = true;

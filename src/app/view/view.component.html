@@ -1,23 +1,19 @@
 <app-loading [condition]="isLoading"></app-loading>
+
 <app-toast [message]="toast.message"></app-toast>
 
 <div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Account settings</h4>
+  <h4 class="card-header">{{user.organisation}} Account Info</h4>
   <div class="card-block">
     <form #accountForm="ngForm" (ngSubmit)="save(user)">
       <div class="input-group">
-        <label>User Name: </label>
-        <input class="form-control" type="text" name="username" [(ngModel)]="user.username" placeholder="Username" required>
+        <label>User Name: </label><br/>{{user.username}}
       </div>
       <div class="input-group">
-        <label>Email Address: </label>
-        <input class="form-control" type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required>
+        <label>Email Address: </label><br/>{{user.email}}
       </div>
     <div class="input-group">
       <label>Organisation: </label> <br/>{{user.organisation}}
-    </div>
-    <div class="input-group">
-      <label>Location/University: </label> <br/>{{user.location}}
     </div>
     <div class="input-group">
       <label>Sector: </label> <br/>{{user.sector}}
@@ -26,7 +22,7 @@
       <label>Category: </label> <br/>{{user.category}}
     </div>
       <button class="btn btn-primary" type="submit" [disabled]="!accountForm.form.valid">
-        <i class="fa fa-save"></i> Save
+        <i class="fa fa-save"></i> Message {{user.organisation}}
       </button>
     </form>
   </div>

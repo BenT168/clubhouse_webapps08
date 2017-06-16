@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var bcrypt = require("bcryptjs");
 var mongoose = require("mongoose");
 var userSchema = new mongoose.Schema({
-    username: String,
+    username: { type: String },
     email: { type: String, unique: true, lowercase: true, trim: true },
-    password: String,
-    location: String,
-    organisation: String,
+    password: { type: String },
+    location: { type: String },
+    organisation: { type: String },
     category: String,
     sector: String
 });

@@ -1,8 +1,12 @@
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card">
-  <h4 class="card-header">Register</h4>
-  <div class="card-block">
+<div id="div-with-bg">
+<div class="container">
+  <section id="content">
+    <h1>Sign up to ClubHouse</h1>
+    <div>
+    <h3><br/><a routerLink="/" class="auth-link">Already have an ClubHouse account? Sign in!</a></h3><br/>
+  </div>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -10,19 +14,19 @@
       </div>
       <div class="input-group" [ngClass]="setClassEmail()">
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
+        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" autofocus>
       </div>
       <div class="input-group" [ngClass]="setClassPassword()">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-        <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
+        <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password" autofocus>
       </div>
       <div class="input-group" [ngClass]="setClassOrganisation()">
-        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-        <input class="form-control" type="text" name="organisation" formControlName="organisation" placeholder="Organisation">
+        <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
+        <input class="form-control" type="text" name="organisation" formControlName="organisation" placeholder="Organisation" autofocus>
       </div>
       <div class="input-group" [ngClass]="setClassLocation()">
-        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-        <input class="form-control" type="text" name="location" formControlName="location" placeholder="Location">
+        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+        <input class="form-control" type="text" name="location" formControlName="location" placeholder="Location/University" autofocus>
       </div>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
@@ -33,7 +37,7 @@
         </select>
       </div>
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
+        <span class="input-group-addon"><i class="fa fa-list"></i></span>
         <select class="form-control" name="sector" formControlName="sector">
           <option value="" selected disabled>Sector</option>
           <option value="fashion">Fashion</option>
@@ -45,7 +49,9 @@
           <option value="others">Others</option>
         </select>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+      <br/><button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button><br/>
     </form>
+      <br/><br/>
+      </section>
   </div>
-</div>
+  </div>

@@ -7,20 +7,22 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccountComponent } from './account/account.component';
-import { CompanyComponent } from './company/company.component';
+import { ViewComponent } from './view/view.component';
+import { UserListComponent } from './userList/userList.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
-import { AuthGuardCompany } from './services/auth-guard-company.service';
+import { AuthGuardCurrent } from './services/auth-guard-current.service';
 
 const routes: Routes = [
-  { path: '', component: AboutComponent },
+  { path: '', component: LoginComponent },
   { path: 'cats', component: CatsComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'home', component: AboutComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardLogin] },
-  { path: 'company', component: CompanyComponent, canActivate: [AuthGuardCompany] },
+  { path: 'view', component: ViewComponent, canActivate: [AuthGuardCurrent] },
+  { path: 'userList', component: UserListComponent  },
   { path: 'notfound', component: NotFoundComponent },
   { path: '**', redirectTo: '/notfound' },
 ];

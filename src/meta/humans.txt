@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  BEN SHENG TAN
+  MARK ADUOL
+  ALESSIO ICCITTI
+  ADANNA AKWATAGHIBE
+
+# TECHNOLOGY COLOPHON
+
+  HTML5, CSS3, Bootstrap
+  Angular2, TypeScript, Webpack

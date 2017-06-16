@@ -21,7 +21,7 @@ export default function setRoutes(app) {
   router.route('/cat/:id').delete(catCtrl.delete);
 
   // Users
-  router.route('/login').post(userCtrl.login);
+  router.route('/').post(userCtrl.login);
   router.route('/users').get(userCtrl.getAll);
   router.route('/users/count').get(userCtrl.count);
   router.route('/user').post(userCtrl.insert);
