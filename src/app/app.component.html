@@ -5,8 +5,6 @@
       <li class="active"><a class="icon-home" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> Home</a></li><!-- whitespace
       --><li><a class="icon-leaf" routerLink="/account" routerLinkActive="active" >Account ({{auth.currentUser.organisation}})</a></li><!-- whitespace
       --><li><a class="icon-envelope-alt" routerLink="/messaging" routerLinkActive="active">Messaging</a></li><!-- whitespace
-      --><li><a class="icon-picture" routerLink="/" routerLinkActive="active" *ngIf="!auth.loggedIn">Login</a></li><!-- whitespace
-      --><li><a class="icon-leaf" routerLink="/register" routerLinkActive="active" *ngIf="!auth.loggedIn">Register</a></li><!-- whitespace
       --><li><a class="icon-group" routerLink="/userList" routerLinkActive="active" >User List</a></li><!-- whitespace
       --><li><a class="icon-pushpin" routerLink="/cats" routerLinkActive="active">Records</a></li><!-- whitespace
       --><li><a class="icon-picture" routerLink="/logout" routerLinkActive="active">Logout</a></li>
