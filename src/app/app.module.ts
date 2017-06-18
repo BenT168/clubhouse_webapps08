@@ -5,7 +5,10 @@ import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
-import { FilterPipe } from './pipe/filterPipe'
+import { FilterService } from './services/filter.service';
+import { SorterService } from './services/sorter.service';
+import { TrackByService } from './services/trackby.service';
+
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardCurrent } from './services/auth-guard-current.service';
 import { AppComponent } from './app.component';
@@ -16,7 +19,6 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccountComponent } from './account/account.component';
 import { UserListComponent } from './userList/userList.component';
-import { ViewComponent } from './view/view.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
@@ -29,9 +31,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LogoutComponent,
     AccountComponent,
     UserListComponent,
-    ViewComponent,
-    NotFoundComponent,
-    FilterPipe
+    NotFoundComponent
   ],
   imports: [
     RoutingModule,
@@ -42,7 +42,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AuthGuardLogin,
     AuthGuardCurrent,
     CatService,
-    UserService
+    UserService,
+    FilterService,
+    SorterService,
+    TrackByService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

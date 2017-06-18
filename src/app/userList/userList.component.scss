@@ -5,106 +5,8 @@ label {
   color: #607D8B;
   font-weight: bold;
 }
-users.selected {
-  background-color: #CFD8DC !important;
-  color: white;
-}
-.users {
-  margin: 0 0 6em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 58em;
-}
-.users li {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 2.5em;
-  border-radius: 4px;
-}
-.users li:hover {
-  color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
-}
-.users li.selected:hover {
-  background-color: #BBD8DC !important;
-  color: white;
-}
-.users .text {
-  position: relative;
-  top: -3px;
-}
-.users .badge {
-  display: inline-block;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607D8B;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 2.5em;
-  width: 10em;
-  margin-right: 0.8em;
-  border-radius: 4px 0 0 4px;
-}
-.users .badge2 {
-  display: inline-block;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #5c8a8a;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 2.5em;
-  width: 5em;
-  margin-right: 0.8em;
-  border-radius: 4px 0 0 4px;
-}
-.users .badge3 {
-  display: inline-block;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #669999;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 2.5em;
-  width: 6em;
-  margin-right: 0.8em;
-  border-radius: 4px 0 0 4px;
-}
-.users .badge5 {
-  display: inline-block;
-  padding: 0.8em 0.7em 0 0.7em;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 2.5em;
-  width: 14em;
-  margin-right: 0.8em;
-  border-radius: 4px 0 0 4px;
-}
-.users .badge4 {
-  display: inline-block;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #85adad;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 2.5em;
-  width: 16em;
-  margin-right: 0.8em;
-  border-radius: 4px 0 0 4px;
+td {
+    vertical-align: middle;
 }
 button {
   font-family: Arial;
@@ -119,7 +21,6 @@ button:hover {
   background-color: #cfd8dc;
 }
 button.view {
-  float:right;
   margin-top: 2px;
   margin-right: .8em;
   background-color: gray !important;

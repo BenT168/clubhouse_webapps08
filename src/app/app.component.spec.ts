@@ -25,11 +25,11 @@ describe('Component: App', () => {
 
   it('should display the navigation bar correctly', () => {
     const de = fixture.debugElement.queryAll(By.css('a'));
-    expect(de.length).toBe(3);
+    expect(de.length).toBe(6);
     expect(de[0].nativeElement.textContent).toContain('Home');
     expect(de[1].nativeElement.textContent).toContain('About');
     expect(de[0].attributes['routerLink']).toBe('/home');
-    expect(de[1].attributes['routerLink']).toBe('/about');
+    expect(de[1].attributes['routerLink']).toBe('/home');
   });*/
 
 });

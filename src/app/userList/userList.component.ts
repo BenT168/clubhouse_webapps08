@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { FilterService } from '../services/filter.service';
+
+import { SorterService } from '../services/sorter.service';
+import { TrackByService } from '../services/trackby.service';
 
 @Component({
   selector: 'app-userList',
@@ -11,14 +15,18 @@ import { UserService } from '../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  selectedUser = {};
-  users = [];
+  selectedUser : string;
+  users : any[] = [];
+  filteredUsers : any[] = [];
   isLoading = true;
 
   constructor(public auth: AuthService,
               public toast: ToastComponent,
               private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              private sorterService: SorterService,
+              public trackbyService: TrackByService,
+              private filterService: FilterService) { }
 
   ngOnInit() {
     this.getUsers();
@@ -26,21 +34,25 @@ export class UserListComponent implements OnInit {
 
   getUsers() {
     this.userService.getUsers().subscribe(
-      data => this.users = data,
+      data => this.users = this.filteredUsers = data,
       error => console.log(error),
       () => this.isLoading = false
     );
   }
 
-  onSelect(user): void {
-    this.selectedUser = user;
+  sort(prop: string) {
+      this.sorterService.sort(this.users, prop);
   }
 
-  viewUser(selectedUser) {
-    this.auth.view(selectedUser).subscribe(
-      res => this.router.navigate(['/view'], this.selectedUser),
-      error => this.toast.setMessage('invalid press!', 'danger')
-    );
+  filterChanged(data: string) {
+    if (data && this.users) {
+        data = data.toUpperCase();
+        const props = ['username', 'location', 'organisation', 'sector'];
+        this.filteredUsers = this.filterService.filter<any>(this.users, data, props);
+    }
+    else {
+      this.filteredUsers = this.users;
+    }
   }
 
 }
