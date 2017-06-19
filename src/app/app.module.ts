@@ -1,10 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import {HttpModule} from '@angular/http';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+import { MessagingService } from './services/messaging.service';
 import { FilterService } from './services/filter.service';
 import { SorterService } from './services/sorter.service';
 import { TrackByService } from './services/trackby.service';
@@ -17,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { MessagingComponent } from './messaging/messaging.component';
 import { AccountComponent } from './account/account.component';
 import { UserListComponent } from './userList/userList.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -28,6 +30,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AboutComponent,
     RegisterComponent,
     LoginComponent,
+    MessagingComponent,
     LogoutComponent,
     AccountComponent,
     UserListComponent,
@@ -35,7 +38,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   imports: [
     RoutingModule,
-    SharedModule
+    SharedModule,
+    HttpModule
   ],
   providers: [
     AuthService,
@@ -45,7 +49,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     UserService,
     FilterService,
     SorterService,
-    TrackByService
+    TrackByService,
+    MessagingService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -8,7 +8,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "start": "node dist/server/app.js",
+    "start": "node ./bin/www && node dist/server/app.js",
     "predev": "tsc -p server",
     "dev": "concurrently \"mongod\" \"ng serve -pc proxy.conf.json --open\" \"tsc -w -p server\" \"nodemon dist/server/app.js\"",
     "prod": "concurrently \"mongod\" \"ng build -aot -prod && tsc -p server && node dist/server/app.js\"",
@@ -40,7 +40,11 @@
     "mongoose": "^4.10.4",
     "morgan": "^1.8.2",
     "rxjs": "^5.1.0",
+    "serve-favicon": "^2.4.3",
+    "socket.io-client": "^2.0.3",
+    "socketio": "^1.0.0",
     "tether": "1.4.0",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

@@ -27,9 +27,9 @@ describe('Component: App', () => {
     const de = fixture.debugElement.queryAll(By.css('a'));
     expect(de.length).toBe(6);
     expect(de[0].nativeElement.textContent).toContain('Home');
-    expect(de[1].nativeElement.textContent).toContain('About');
+    expect(de[1].nativeElement.textContent).toContain('Account');
     expect(de[0].attributes['routerLink']).toBe('/home');
-    expect(de[1].attributes['routerLink']).toBe('/home');
+    expect(de[1].attributes['routerLink']).toBe('/account');
   });*/
 
 });

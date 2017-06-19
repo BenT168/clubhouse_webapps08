@@ -6,9 +6,17 @@ var express = require("express");
 var morgan = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
+var http = require("http");
+var xhr = require("xmlhttprequest");
+var socket = require("socket.io");
 var routes_1 = require("./routes");
+var XMLHttpRequest = xhr.XMLHttpRequest;
+exports.XMLHttpRequest = XMLHttpRequest;
 var app = express();
 exports.app = app;
+var router = express.Router();
+var server = http.createServer(app);
+var io = socket(server);
 dotenv.load({ path: '.env' });
 app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(path.join(__dirname, '../public')));
@@ -27,6 +35,18 @@ db.once('open', function () {
     });
     app.listen(app.get('port'), function () {
         console.log('Angular Full Stack listening on port ' + app.get('port'));
+    });
+});
+server.listen(4000);
+// socket io
+io.on('connection', function (socket) {
+    console.log('User connected');
+    socket.on('disconnect', function () {
+        console.log('User disconnected');
+    });
+    socket.on('save-message', function (data) {
+        console.log(data);
+        io.emit('new-message', { message: data });
     });
 });
 //# sourceMappingURL=app.js.map

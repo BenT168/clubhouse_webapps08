@@ -2,8 +2,10 @@ import * as express from 'express';
 
 import CatCtrl from './controllers/cat';
 import UserCtrl from './controllers/user';
+import MessagingCtrl from './controllers/messaging';
 import Cat from './models/cat';
 import User from './models/user';
+import Messaging from './models/messaging';
 
 export default function setRoutes(app) {
 
@@ -11,6 +13,8 @@ export default function setRoutes(app) {
 
   const catCtrl = new CatCtrl();
   const userCtrl = new UserCtrl();
+  const messagingCtrl = new MessagingCtrl();
+
 
   // Cats
   router.route('/cats').get(catCtrl.getAll);
@@ -28,6 +32,13 @@ export default function setRoutes(app) {
   router.route('/user/:id').get(userCtrl.get);
   router.route('/user/:id').put(userCtrl.update);
   router.route('/user/:id').delete(userCtrl.delete);
+
+  // Messaging
+  router.route('/messaging').post(messagingCtrl.save);
+  router.route('/messaging/:room').get(messagingCtrl.getAllRoom);
+  router.route('/messaging/:id').get(messagingCtrl.get);
+  router.route('/messaging/:id').put(messagingCtrl.update);
+  router.route('/messaging/:id').delete(messagingCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
