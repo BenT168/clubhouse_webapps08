@@ -6,15 +6,14 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as http from 'http';
-
 import * as socket from 'socket.io';
 
 import setRoutes from './routes';
 
 const app = express();
-const router = express.Router();
 const server = http.createServer(app);
-const io = socket(server);
+const io = socket.listen(server);
+
 dotenv.load({ path: '.env' });
 app.set('port', (process.env.PORT || 3000));
 
@@ -42,8 +41,6 @@ db.once('open', () => {
   });
 
 });
-
-server.listen(4000);
 
 // socket io
 io.on('connection', function (socket) {

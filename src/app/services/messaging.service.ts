@@ -7,9 +7,9 @@ export class MessagingService {
 
   constructor(private http: Http) { }
 
-  getMessagingByRoom(room) {
+  getAllMessagesByRoom(room) {
     return new Promise((resolve, reject) => {
-      this.http.get('/messaging/' + room)
+      this.http.get('/api/messaging/' + room)
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);
@@ -21,7 +21,7 @@ export class MessagingService {
 
   saveMessaging(data) {
     return new Promise((resolve, reject) => {
-        this.http.post('/messaging', data)
+        this.http.post('/api/messaging', data)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res);
@@ -33,7 +33,7 @@ export class MessagingService {
 
   showMessaging(id) {
     return new Promise((resolve, reject) => {
-        this.http.get('/messaging/' + id)
+        this.http.get('/api/messaging/' + id)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res)
@@ -45,7 +45,7 @@ export class MessagingService {
 
   updateMessaging(id, data) {
     return new Promise((resolve, reject) => {
-        this.http.put('/messaging/'+id, data)
+        this.http.put('/api/messaging/'+id, data)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res);
@@ -57,7 +57,7 @@ export class MessagingService {
 
   deleteMessaging(id) {
     return new Promise((resolve, reject) => {
-        this.http.delete('/messaging/'+id)
+        this.http.delete('/api/messaging/'+id)
           .subscribe(res => {
             resolve(res);
           }, (err) => {

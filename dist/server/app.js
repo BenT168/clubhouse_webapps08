@@ -11,9 +11,8 @@ var socket = require("socket.io");
 var routes_1 = require("./routes");
 var app = express();
 exports.app = app;
-var router = express.Router();
 var server = http.createServer(app);
-var io = socket(server);
+var io = socket.listen(server);
 dotenv.load({ path: '.env' });
 app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(path.join(__dirname, '../public')));
@@ -34,7 +33,6 @@ db.once('open', function () {
         console.log('Angular Full Stack listening on port ' + app.get('port'));
     });
 });
-server.listen(4000);
 // socket io
 io.on('connection', function (socket) {
     console.log('User connected');

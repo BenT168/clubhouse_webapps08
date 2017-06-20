@@ -41,6 +41,7 @@ var BaseCtrl = (function () {
                 if (err) {
                     return console.error(err);
                 }
+                console.log("In get...");
                 res.json(obj);
             });
         };

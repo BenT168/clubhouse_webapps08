@@ -19,7 +19,7 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
   newRoom = { name: '', organisation: '' };
   msgData = { room: '', nickname: '', message: '' };
   roomData = { name: '', organisation: '' };
-  socket = io('http://localhost:4000');
+  socket = io('/api/');
 
   constructor(private messagingService: MessagingService,
               private auth: AuthService) {}
@@ -28,7 +28,7 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
     var user = JSON.parse(localStorage.getItem("user"));
     var room = JSON.parse(localStorage.getItem("room"));
     if(user!==null) {
-      this.getMessagingByRoom(user.room);
+      this.getAllMessagesByRoom(user.room);
       this.msgData = { room: user.room, nickname: user.nickname, message: '' }
       this.joined = true;
       this.scrollToBottom();
@@ -40,6 +40,8 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
         this.scrollToBottom();
       }
     }.bind(this));
+    // Get all messages in current room at periodic intervals and update list.
+    var intervalID = setInterval(this.getAllMessagesByRoom(room), 1000);
   }
 
   ngAfterViewChecked() {
@@ -52,8 +54,9 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
     } catch(err) { }
   }
 
-  getMessagingByRoom(room) {
-    this.messagingService.getMessagingByRoom(room).then((res) => {
+  // Note: Bad side effects (i.e: not strictly a get; it updates 'messagings')
+  getAllMessagesByRoom(room) {
+    this.messagingService.getAllMessagesByRoom(room).then((res) => {
       this.messagings = res;
     }, (err) => {
       console.log(err);
@@ -63,7 +66,7 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
   joinRoom() {
     var date = new Date();
     localStorage.setItem("user", JSON.stringify(this.newUser));
-    this.getMessagingByRoom(this.newUser.room);
+    this.getAllMessagesByRoom(this.newUser.room);
     this.newUser.nickname = this.auth.currentUser.username;
     this.msgData = { room: this.newUser.room, nickname: this.newUser.nickname, message: '' };
     this.joined = true;
@@ -80,6 +83,7 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
   sendMessage() {
     this.messagingService.saveMessaging(this.msgData).then((result) => {
       this.socket.emit('save-message', result);
+      this.messagings.push(result);
     }, (err) => {
       console.log(err);
     });

@@ -18,15 +18,21 @@ var MessagingCtrl = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.model = messaging_1.default;
         _this.getAllRoom = function (req, res) {
-            _this.model.findOne({ room: req.params.room }, function (err, messaging) {
+            _this.model.find({ room: req.params.room }, function (err, messages) {
                 if (err) {
                     return console.error(err);
                 }
-                res.json(messaging);
+                if (!messages.length) {
+                    console.log("No room \'" + req.params.room + "\' found.");
+                }
+                else {
+                    res.json(messages);
+                }
             });
         };
         _this.save = function (req, res) {
             _this.model.create(req.body, function (err, post) {
+                console.log("Saving post " + post + ".\n");
                 if (err) {
                     return console.error(err);
                 }
