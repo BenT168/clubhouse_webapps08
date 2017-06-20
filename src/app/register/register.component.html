@@ -3,42 +3,44 @@
 <div id="div-with-bg">
 <div class="container">
   <section id="content">
-    <h1>Sign up to ClubHouse</h1>
+    <img src="../../assets/favicon.ico" alt="logo" style="width:184px;height:158px;">
+    <h2>Sign up to ClubHouse</h2>
     <div>
-    <h3><br/><a routerLink="/" class="auth-link">Already have an ClubHouse account? Sign in!</a></h3><br/>
+    <h3><br/><a routerLink="/" class="auth-link">Already have a ClubHouse account? Sign in!</a></h3><br/>
   </div>
+    <div>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
-      <div class="input-group" [ngClass]="setClassUsername()">
+      <div *ngIf="selectedCategory" class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
         <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus>
       </div>
-      <div class="input-group" [ngClass]="setClassEmail()">
+      <div *ngIf="selectedCategory" class="input-group" [ngClass]="setClassEmail()">
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
         <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" autofocus>
       </div>
-      <div class="input-group" [ngClass]="setClassPassword()">
+      <div *ngIf="selectedCategory" class="input-group" [ngClass]="setClassPassword()">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password" autofocus>
       </div>
-      <div class="input-group" [ngClass]="setClassOrganisation()">
+      <div *ngIf="selectedCategory" class="input-group" [ngClass]="setClassOrganisation()">
         <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
         <input class="form-control" type="text" name="organisation" formControlName="organisation" placeholder="Organisation" autofocus>
       </div>
-      <div class="input-group" [ngClass]="setClassLocation()">
+      <div *ngIf="selectedCategory" class="input-group" [ngClass]="setClassLocation()">
         <span class="input-group-addon"><i class="fa fa-home"></i></span>
         <input class="form-control" type="text" name="location" formControlName="location" placeholder="Location/University" autofocus>
       </div>
-      <div class="input-group">
+      <div *ngIf="!selectedCategory" class="input-group">
         <span class="input-group-addon"><i class="fa fa-group"></i></span>
-        <select class="form-control" name="category" formControlName="category">
+        <select class="form-control" name="category" formControlName="category" required>
           <option value="" selected disabled>Category</option>
           <option value="society">Society</option>
           <option value="company">Company</option>
         </select>
       </div>
-      <div class="input-group">
+      <div *ngIf="!selectedCategory" class="input-group">
         <span class="input-group-addon"><i class="fa fa-industry"></i></span>
-        <select class="form-control" name="sector" formControlName="sector">
+        <select class="form-control" name="sector" formControlName="sector" required>
           <option value="" selected disabled>Sector</option>
           <option value="fashion">Fashion</option>
           <option value="education">Education</option>
@@ -49,9 +51,17 @@
           <option value="others">Others</option>
         </select>
       </div>
-      <br/><button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button><br/>
+      <br/>
+      <div *ngIf="!selectedCategory">
+      <button class="btn btn-primary" (click)="selectCategory()"><i class="fa fa-user-plus"></i> Select</button>
+    </div>
+      <div *ngIf="selectedCategory">
+      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+      <br/>
+    </div>
     </form>
       <br/><br/>
-      </section>
   </div>
+</section>
+</div>
   </div>

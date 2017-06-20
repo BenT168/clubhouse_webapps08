@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-const catSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   name: String,
   organisation: String,
   task: String,
@@ -8,6 +8,6 @@ const catSchema = new mongoose.Schema({
   date: String
 });
 
-const Cat = mongoose.model('Cat', catSchema);
+const Event = mongoose.model('Event', eventSchema);
 
-export default Cat;
+export default Event;

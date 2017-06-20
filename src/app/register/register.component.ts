@@ -11,6 +11,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 })
 export class RegisterComponent implements OnInit {
 
+  selectedCategory = false;
   registerForm: FormGroup;
   username = new FormControl('', [Validators.required,
                                   Validators.minLength(2),
@@ -71,4 +72,10 @@ export class RegisterComponent implements OnInit {
       error => this.toast.setMessage('email already exists', 'danger')
     );
   }
+
+  selectCategory() {
+      this.selectedCategory = true;
+  }
+
+
 }

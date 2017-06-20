@@ -5,8 +5,8 @@ export interface IUser {
     id: number;
     username: string;
     email: string;
-    location: String,
-    organisation: String,
-    category: String,
+    location: String;
+    organisation: String;
+    category: String;
     sector: String
 }

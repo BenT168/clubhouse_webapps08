@@ -1,21 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
-var cat_1 = require("./controllers/cat");
+var event_1 = require("./controllers/event");
 var user_1 = require("./controllers/user");
 var messaging_1 = require("./controllers/messaging");
 function setRoutes(app) {
     var router = express.Router();
-    var catCtrl = new cat_1.default();
+    var eventCtrl = new event_1.default();
     var userCtrl = new user_1.default();
     var messagingCtrl = new messaging_1.default();
-    // Cats
-    router.route('/cats').get(catCtrl.getAll);
-    router.route('/cats/count').get(catCtrl.count);
-    router.route('/cat').post(catCtrl.insert);
-    router.route('/cat/:id').get(catCtrl.get);
-    router.route('/cat/:id').put(catCtrl.update);
-    router.route('/cat/:id').delete(catCtrl.delete);
+    // Events
+    router.route('/events').get(eventCtrl.getAll);
+    router.route('/events/count').get(eventCtrl.count);
+    router.route('/event').post(eventCtrl.insert);
+    router.route('/event/:id').get(eventCtrl.get);
+    router.route('/event/:id').put(eventCtrl.update);
+    router.route('/event/:id').delete(eventCtrl.delete);
     // Users
     router.route('/').post(userCtrl.login);
     router.route('/users').get(userCtrl.getAll);

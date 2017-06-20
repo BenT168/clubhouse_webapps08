@@ -1,9 +1,9 @@
 import * as express from 'express';
 
-import CatCtrl from './controllers/cat';
+import EventCtrl from './controllers/event';
 import UserCtrl from './controllers/user';
 import MessagingCtrl from './controllers/messaging';
-import Cat from './models/cat';
+import Event from './models/event';
 import User from './models/user';
 import Messaging from './models/messaging';
 
@@ -11,18 +11,17 @@ export default function setRoutes(app) {
 
   const router = express.Router();
 
-  const catCtrl = new CatCtrl();
+  const eventCtrl = new EventCtrl();
   const userCtrl = new UserCtrl();
   const messagingCtrl = new MessagingCtrl();
 
-
-  // Cats
-  router.route('/cats').get(catCtrl.getAll);
-  router.route('/cats/count').get(catCtrl.count);
-  router.route('/cat').post(catCtrl.insert);
-  router.route('/cat/:id').get(catCtrl.get);
-  router.route('/cat/:id').put(catCtrl.update);
-  router.route('/cat/:id').delete(catCtrl.delete);
+  // Events
+  router.route('/events').get(eventCtrl.getAll);
+  router.route('/events/count').get(eventCtrl.count);
+  router.route('/event').post(eventCtrl.insert);
+  router.route('/event/:id').get(eventCtrl.get);
+  router.route('/event/:id').put(eventCtrl.update);
+  router.route('/event/:id').delete(eventCtrl.delete);
 
   // Users
   router.route('/').post(userCtrl.login);

@@ -6,8 +6,7 @@
   <h4 class="card-header">Registered Users ({{filteredUsers.length}})</h4>
   <div class="card-block">
 
-    <cm-filter-textbox class="navbar-right"
-                   (changed)="filterChanged($event)"></cm-filter-textbox>
+    <cm-filter-textbox (changed)="filterChanged($event)"></cm-filter-textbox>
 
     <br/>
 
@@ -32,7 +31,7 @@
           <span class="fa fa-caret-up"></span>
         </th>
         <!-- Or you can do this directly rather than using sort-by directive -->
-        <th>Messaging</th>
+        <th>Actions</th>
       </tr>
     </thead>
       <tbody *ngIf="users.length === 0">
@@ -46,8 +45,13 @@
           <td>{{user.email}}</td>
           <td>{{user.location}}</td>
           <td>{{user.sector}}</td>
-          <td>
-              <button class="view" routerLink="/messaging"><i class="fa fa-user-circle"></i></button>
+          <td >
+            <span *ngIf=" user.organisation === auth.currentUser.organisation">
+              <button class="btn btn-sm btn-warning" routerLink="/account"><i class="fa fa-pencil"></i>Edit Profile</button>
+            </span>
+            <span *ngIf="user.organisation !== auth.currentUser.organisation" >
+                <button class="btn btn-sm btn-success" routerLink="/messaging"><i class="fa fa-user-circle"></i>Messaging</button>
+            </span>
           </td>
         </tr>
       </tbody>

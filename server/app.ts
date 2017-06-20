@@ -6,14 +6,11 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as http from 'http';
-import * as xhr from 'xmlhttprequest';
 
 import * as socket from 'socket.io';
 
-
 import setRoutes from './routes';
 
-const XMLHttpRequest = xhr.XMLHttpRequest;
 const app = express();
 const router = express.Router();
 const server = http.createServer(app);
@@ -61,4 +58,3 @@ io.on('connection', function (socket) {
 });
 
 export { app };
-export { XMLHttpRequest };

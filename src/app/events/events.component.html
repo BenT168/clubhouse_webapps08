@@ -1,0 +1,113 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="!isLoading && !isEditing">
+  <h4 class="card-header">Current Active Events ({{events.length}})</h4>
+  <div class="card-block">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Organisation
+          </th>
+          <th cm-sort-by="task" (sorted)="sort($event)" >
+            Event
+            <span class="fa fa-caret-down"></span>
+            <span class="fa fa-caret-up"></span>
+          </th>
+          <th cm-sort-by="location" (sorted)="sort($event)" >
+            Location
+            <span class="fa fa-caret-down"></span>
+            <span class="fa fa-caret-up"></span>
+          </th>
+          <th cm-sort-by="date" (sorted)="sort($event)" >
+            Date
+            <span class="fa fa-caret-down"></span>
+            <span class="fa fa-caret-up"></span>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="events.length === 0">
+        <tr>
+          <td colspan="6">There is no event at the moment. Add a new event below.</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!isEditing">
+        <tr *ngFor="let event of events; trackBy:trackbyService.event">
+          <td>{{event.name}}</td>
+          <td>{{event.organisation}}</td>
+          <td>{{event.task}}</td>
+          <td>{{event.location}}</td>
+          <td>{{event.date}}</td>
+          <td>
+
+            <span *ngIf="currentUser && event.organisation === auth.currentUser.organisation">
+              <button class="btn btn-sm btn-warning" (click)="enableEditing(event)"><i class="fa fa-pencil"></i> Edit Event </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteEvent(event)"><i class="fa fa-trash"></i> Delete </button>
+            </span>
+            <span *ngIf="currentUser && (event.organisation !== auth.currentUser.organisation)">
+                <button class="btn btn-sm btn-success" routerLink="/messaging"><i class="fa fa-user-circle"></i>Messaging</button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="card" *ngIf="isEditing">
+  <h4 class="card-header">Edit Event</h4>
+    <div class="card-block">
+        <form class="form-inline" #form="ngForm" (ngSubmit)="editEvent(event)" style="display:inline">
+            <div class="form-group">
+              <input type="hidden" name="name" [(ngModel)]="event.name" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="form-group">
+                <input  type="hidden" name="organisation" [(ngModel)]="event.organisation" [ngModelOptions]="{standalone: true}" >
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="task" [(ngModel)]="event.task" placeholder="Task" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="location" [(ngModel)]="event.location" placeholder="Location" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="date" [(ngModel)]="event.date" placeholder="Due Date" required>
+              </div>
+              <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
+            </form>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+
+
+<div class="card" *ngIf="!isEditing">
+  <h4 class="card-header">Add New Event</h4>
+  <div class="card-block">
+    <form class="form-inline" [formGroup]="addEventForm" (ngSubmit)="addEvent()" style="text-align:center">
+      <div class="form-group">
+          <input type="hidden" name="name" [(ngModel)]="event.name" [ngModelOptions]="{standalone: true}" >
+      </div>
+      <div class="form-group">
+        <input  type="hidden" name="organisation" [(ngModel)]="event.organisation" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="task" formControlName="task" placeholder="Event / Task" >
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="location" formControlName="location" placeholder="Location" >
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="date" formControlName="date" placeholder="Due Date">
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!addEventForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,9 @@
-<div class="container">
+<div class="card">
+  <h4 class="card-header">Messaging</h4>
+  <div class="card-block">
+    <div class="container">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-18">
             <div class="panel panel-primary" *ngIf="joinned; else joinroom">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-comment"></span> {{ msgData.room }}
@@ -59,21 +62,30 @@
             <ng-template #joinroom>
               <div class="panel panel-primary">
                 <div class="panel-body">
-                  <h1>Select Messaging Room</h1>
+                  <h4>Select Messaging Room</h4>
                   <form (ngSubmit)="joinRoom()" #joinForm="ngForm">
                     <div class="form-group">
-                      <input type="text" class="form-control" [(ngModel)]="newUser.nickname" name="nickname" placeholder="Nickname" required="" />
+                      <input type="hidden" [(ngModel)]="auth.currentUser.username" name="nickname"/>
                     </div>
                     <div class="form-group">
                       <select class="form-control" [(ngModel)]="newUser.room" name="room" required="">
-                        <option>Select Room</option>
-                        <option value="Javascript">Javascript</option>
-                        <option value="Java">Java</option>
-                        <option value="Python">Python</option>
+                        <option>Select room...</option>
+                        <option *ngFor="let room of rooms" [value]="room.name">{{room.name}}</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-success" [disabled]="!joinForm.form.valid">Join</button>
+                    </div>
+                  </form>
+                  <form (ngSubmit)="addRoom()" #addForm="ngForm">
+                    <div class="form-group">
+                      <input type="hidden" [(ngModel)]="auth.currentUser.organisation" name="organisation"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="room" [(ngModel)]="newRoom.name" placeholder="Room Name" required>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-success" [disabled]="!addForm.form.valid">Add Room</button>
                     </div>
                   </form>
                 </div>
@@ -81,4 +93,6 @@
             </ng-template>
         </div>
     </div>
+</div>
+</div>
 </div>

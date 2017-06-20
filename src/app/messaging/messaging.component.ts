@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { MessagingService } from '../services/messaging.service';
+import { AuthService } from '../services/auth.service';
 import * as io from "socket.io-client";
 
 @Component({
@@ -11,20 +12,25 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-  messagings: any;
-  joinned: boolean = false;
+  messagings: any = [];
+  rooms: any = [];
+  joined: boolean = false;
   newUser = { nickname: '', room: '' };
+  newRoom = { name: '', organisation: '' };
   msgData = { room: '', nickname: '', message: '' };
+  roomData = { name: '', organisation: '' };
   socket = io('http://localhost:4000');
 
-  constructor(private messagingService: MessagingService) {}
+  constructor(private messagingService: MessagingService,
+              private auth: AuthService) {}
 
   ngOnInit() {
     var user = JSON.parse(localStorage.getItem("user"));
+    var room = JSON.parse(localStorage.getItem("room"));
     if(user!==null) {
       this.getMessagingByRoom(user.room);
       this.msgData = { room: user.room, nickname: user.nickname, message: '' }
-      this.joinned = true;
+      this.joined = true;
       this.scrollToBottom();
     }
     this.socket.on('new-message', function (data) {
@@ -58,9 +64,17 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
     var date = new Date();
     localStorage.setItem("user", JSON.stringify(this.newUser));
     this.getMessagingByRoom(this.newUser.room);
+    this.newUser.nickname = this.auth.currentUser.username;
     this.msgData = { room: this.newUser.room, nickname: this.newUser.nickname, message: '' };
-    this.joinned = true;
+    this.joined = true;
     this.socket.emit('save-message', { room: this.newUser.room, nickname: this.newUser.nickname, message: 'Join this room', updated_at: date });
+  }
+
+  addRoom() {
+    localStorage.setItem("room", JSON.stringify(this.newRoom));
+    this.newRoom.organisation = this.auth.currentUser.organisation;
+    this.roomData = { name: this.newRoom.name, organisation: this.newRoom.organisation};
+    this.rooms.push(this.roomData);
   }
 
   sendMessage() {
@@ -76,7 +90,7 @@ export class MessagingComponent implements OnInit, AfterViewChecked {
     var user = JSON.parse(localStorage.getItem("user"));
     this.socket.emit('save-message', { room: user.room, nickname: user.nickname, message: 'Left this room', updated_at: date });
     localStorage.removeItem("user");
-    this.joinned = false;
+    this.joined = false;
   }
 
 }
